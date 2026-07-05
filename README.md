@@ -1,25 +1,106 @@
+# World Flood (NeoForge 1.21.1)
 
-Installation information
-=======
+A small NeoForge mod that floods the Overworld **after** chunk generation. Because
+structures, cities, forests, and biomes generate normally first, you get a true
+"world submerged" look instead of broken structure spawns.
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+## How it works
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+The mod uses a Mixin to hook `ChunkGenerator.applyBiomeDecoration()` at the tail.
+After vanilla features and structures have been placed in a chunk, it scans every
+column and replaces air blocks below the configured `water_level` with water.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+Structures see the normal Y=63 sea level, so they spawn correctly. The flood
+pass then drowns everything underneath.
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+## Installation
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+1. Install NeoForge for Minecraft 1.21.1.
+2. Download the latest `worldflood-*.jar` from the [releases page](../../releases).
+3. Copy the jar into your `mods/` folder.
+4. Launch the game/world.
+
+## Configuration
+
+The config is created at `config/worldflood-common.toml` on first run.
+
+```toml
+[general]
+    # Enable the post-generation flood pass.
+    enabled = true
+
+    # The Y level up to which air will be flooded with water.
+    # Default: 100
+    water_level = 100
+
+    # If true, only air columns exposed to the sky are flooded (keeps caves dry).
+    only_surface = false
+
+    # Enable raising specific structures so they spawn on top of the water.
+    raise_structures = true
+
+    # List of structure overrides. Format:
+    #   "modid:structure_id MODE offset"
+    # Modes:
+    #   RAISE_TO_WATER  -> bottom of structure is placed at water_level
+    #   RAISE_ABOVE     -> bottom of structure is placed at water_level + offset
+    structure_overrides = []
+```
+
+### Raising structures above the flood
+
+If you have a mod that adds ships or villages that should sit on the water
+instead of under it, add their structure IDs to `structure_overrides`.
+
+Example:
+
+```toml
+structure_overrides = [
+    "some_mod:pillager_warship RAISE_TO_WATER 0",
+    "some_mod:villager_ship RAISE_ABOVE 2"
+]
+```
+
+To find a structure's ID, you can usually see it in the mod's jar under
+`data/<modid>/worldgen/structure/`, or by using `/locate structure` autocomplete
+in-game.
+
+## Building from source
+
+Requirements:
+- JDK 21 or newer
+
+```bash
+./gradlew build
+```
+
+The built jar will be in `build/libs/`.
+
+## Contributing
+
+Contributions are welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for
+guidelines.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for
+details.
+
+Some files are derived from the NeoForge Mod Development Kit (MDK) and are used
+under the terms of [TEMPLATE_LICENSE.txt](TEMPLATE_LICENSE.txt).
+
+## Important notes
+
+- **Performance:** At large water levels the mod touches many blocks per chunk.
+  First-time world generation may be slower until chunks settle.
+- **Existing chunks:** The flood pass runs during chunk generation, so already
+  generated chunks are not retroactively flooded.
+- **Caves:** By default every air pocket below `water_level` is filled,
+  including caves and ravines. Set `only_surface = true` to flood only
+  surface-exposed columns.
+- **Water updates:** Water is placed with minimal updates during generation to
+  avoid cascading fluid ticks, but some flowing water at the surface edges is
+  normal.
+- **Structure raising:** Only standard data-driven structures can be lifted.
+  Code-generated terrain (like Lost Cities' worldgen) is not affected by the
+  override list.
