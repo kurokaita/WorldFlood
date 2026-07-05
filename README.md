@@ -54,6 +54,10 @@ The config is created at `config/worldflood-common.toml` on first run.
     #   RAISE_TO_WATER_DRY         -> RAISE_TO_WATER plus keep the interior dry
     #   RAISE_ABOVE_DRY            -> RAISE_ABOVE plus keep the interior dry
     # Offset is in blocks relative to the water level. Negative values sink the structure.
+    #
+    # Note: DRY modes are experimental. They currently carve out a rectangular
+    # dry box around and under the structure because the mod cannot precisely
+    # detect the structure's actual placed boundaries after generation.
     structure_overrides = []
 ```
 
@@ -132,3 +136,6 @@ under the terms of [TEMPLATE_LICENSE.txt](TEMPLATE_LICENSE.txt).
 - **Structure raising:** Only standard data-driven structures can be lifted.
   Code-generated terrain (like Lost Cities' worldgen) is not affected by the
   override list.
+- **DRY modes:** The DRY override modes are experimental. They carve out a
+  rectangular dry box around and under a structure because the mod cannot
+  precisely detect the structure's actual placed boundaries after generation.
