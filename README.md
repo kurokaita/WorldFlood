@@ -36,34 +36,62 @@ The config is created at `config/worldflood-common.toml` on first run.
     # If true, only air columns exposed to the sky are flooded (keeps caves dry).
     only_surface = false
 
-    # Enable raising specific structures so they spawn on top of the water.
-    raise_structures = true
+    # Enable raising structures before they are placed so they sit at/above the water surface.
+    raise_structures = false
+
+    # Automatically add every loaded structure to structure_overrides with mode NONE.
+    # This only happens once, when the list is empty, so you can edit or clear it afterwards.
+    auto_populate_structures = true
 
     # List of structure overrides. Format:
     #   "modid:structure_id MODE offset"
+    # Use "modid:*" to match every structure from that mod.
     # Modes:
-    #   RAISE_TO_WATER  -> bottom of structure is placed at water_level
-    #   RAISE_ABOVE     -> bottom of structure is placed at water_level + offset
+    #   NONE                       -> leave the structure as-is
+    #   RAISE_TO_WATER             -> bottom of structure is placed at water_level
+    #   RAISE_ABOVE                -> bottom of structure is placed at water_level + offset
+    #   DRY                        -> keep the structure's interior air blocks dry (no raising)
+    #   RAISE_TO_WATER_DRY         -> RAISE_TO_WATER plus keep the interior dry
+    #   RAISE_ABOVE_DRY            -> RAISE_ABOVE plus keep the interior dry
+    # Offset is in blocks relative to the water level. Negative values sink the structure.
     structure_overrides = []
 ```
 
 ### Raising structures above the flood
 
-If you have a mod that adds ships or villages that should sit on the water
-instead of under it, add their structure IDs to `structure_overrides`.
+If you have a mod that adds ships, villages, or outposts that should sit on the
+water instead of under it, add their structure IDs to `structure_overrides`.
 
 Example:
 
 ```toml
 structure_overrides = [
     "some_mod:pillager_warship RAISE_TO_WATER 0",
-    "some_mod:villager_ship RAISE_ABOVE 2"
+    "some_mod:villager_ship RAISE_ABOVE 2",
+    "another_mod:* RAISE_TO_WATER 0"
 ]
 ```
 
 To find a structure's ID, you can usually see it in the mod's jar under
 `data/<modid>/worldgen/structure/`, or by using `/locate structure` autocomplete
 in-game.
+
+### Auto-detected structures
+
+On first server start, World Flood scans every loaded structure and writes two
+helpful files to your `config/` folder:
+
+- `config/worldflood-detected.toml` — a reference list of every detected
+  structure, grouped by mod, plus suggestions for structures whose names look
+  like they belong on the water (ships, villages, outposts, etc.). This file is
+  only created if it does not already exist, so it is safe to edit or delete.
+- `config/worldflood-common.toml` — if `auto_populate_structures` is `true` and
+  `structure_overrides` is empty, the mod pre-fills `structure_overrides` with
+  every loaded structure set to `NONE 0`. This gives you a starting list you can
+  tweak without having to look up IDs by hand.
+
+The auto-population only happens once. After you edit `structure_overrides`, the
+mod will not overwrite your changes.
 
 ## Building from source
 
