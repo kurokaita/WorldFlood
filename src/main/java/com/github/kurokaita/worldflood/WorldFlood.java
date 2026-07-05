@@ -1,4 +1,4 @@
-package net.waterworld.worldflood;
+package com.github.kurokaita.worldflood;
 
 import com.mojang.brigadier.Command;
 import com.mojang.logging.LogUtils;
@@ -13,9 +13,9 @@ import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.waterworld.worldflood.worldgen.StructureConfigPopulator;
-import net.waterworld.worldflood.worldgen.StructureDetector;
-import net.waterworld.worldflood.worldgen.StructureOverrideManager;
+import com.github.kurokaita.worldflood.worldgen.StructureConfigPopulator;
+import com.github.kurokaita.worldflood.worldgen.StructureDetector;
+import com.github.kurokaita.worldflood.worldgen.StructureOverrideManager;
 import org.slf4j.Logger;
 
 @Mod(WorldFlood.MOD_ID)

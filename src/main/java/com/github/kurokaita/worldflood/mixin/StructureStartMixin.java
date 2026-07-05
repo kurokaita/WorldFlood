@@ -1,4 +1,4 @@
-package net.waterworld.worldflood.mixin;
+package com.github.kurokaita.worldflood.mixin;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -10,9 +10,9 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.waterworld.worldflood.WorldFlood;
-import net.waterworld.worldflood.WorldFloodConfig;
-import net.waterworld.worldflood.worldgen.StructureOverrideManager;
+import com.github.kurokaita.worldflood.WorldFlood;
+import com.github.kurokaita.worldflood.WorldFloodConfig;
+import com.github.kurokaita.worldflood.worldgen.StructureOverrideManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

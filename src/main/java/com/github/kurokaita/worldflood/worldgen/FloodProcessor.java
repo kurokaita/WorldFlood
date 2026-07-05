@@ -1,4 +1,4 @@
-package net.waterworld.worldflood.worldgen;
+package com.github.kurokaita.worldflood.worldgen;
 
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
@@ -15,9 +15,9 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
-import net.waterworld.worldflood.WorldFlood;
-import net.waterworld.worldflood.WorldFloodConfig;
-import net.waterworld.worldflood.worldgen.StructureOverrideManager.Mode;
+import com.github.kurokaita.worldflood.WorldFlood;
+import com.github.kurokaita.worldflood.WorldFloodConfig;
+import com.github.kurokaita.worldflood.worldgen.StructureOverrideManager.Mode;
 
 import java.util.List;
 

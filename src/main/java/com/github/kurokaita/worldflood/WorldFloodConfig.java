@@ -1,4 +1,4 @@
-package net.waterworld.worldflood;
+package com.github.kurokaita.worldflood;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 

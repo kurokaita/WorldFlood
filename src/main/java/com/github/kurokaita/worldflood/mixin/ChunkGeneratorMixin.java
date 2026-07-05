@@ -1,10 +1,10 @@
-package net.waterworld.worldflood.mixin;
+package com.github.kurokaita.worldflood.mixin;
 
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.waterworld.worldflood.worldgen.FloodProcessor;
+import com.github.kurokaita.worldflood.worldgen.FloodProcessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

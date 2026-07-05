@@ -1,4 +1,4 @@
-package net.waterworld.worldflood.worldgen;
+package com.github.kurokaita.worldflood.worldgen;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -70,7 +70,7 @@ public class StructureDetector {
             Files.createDirectories(configDir);
             Files.writeString(file, sb.toString());
         } catch (IOException e) {
-            net.waterworld.worldflood.WorldFlood.LOGGER.error("Failed to write detected structures file", e);
+            com.github.kurokaita.worldflood.WorldFlood.LOGGER.error("Failed to write detected structures file", e);
         }
     }
 

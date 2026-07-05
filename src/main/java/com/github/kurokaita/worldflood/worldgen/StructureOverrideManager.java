@@ -1,7 +1,7 @@
-package net.waterworld.worldflood.worldgen;
+package com.github.kurokaita.worldflood.worldgen;
 
 import net.minecraft.resources.ResourceLocation;
-import net.waterworld.worldflood.WorldFloodConfig;
+import com.github.kurokaita.worldflood.WorldFloodConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class StructureOverrideManager {
         for (String raw : WorldFloodConfig.STRUCTURE_OVERRIDES.get()) {
             String[] parts = raw.trim().split("\\s+");
             if (parts.length < 2 || parts.length > 3) {
-                net.waterworld.worldflood.WorldFlood.LOGGER.warn("Skipping malformed structure override: {}", raw);
+                com.github.kurokaita.worldflood.WorldFlood.LOGGER.warn("Skipping malformed structure override: {}", raw);
                 continue;
             }
 
@@ -59,7 +59,7 @@ public class StructureOverrideManager {
             try {
                 mode = Mode.valueOf(parts[1]);
             } catch (IllegalArgumentException e) {
-                net.waterworld.worldflood.WorldFlood.LOGGER.warn("Unknown structure override mode in: {}", raw);
+                com.github.kurokaita.worldflood.WorldFlood.LOGGER.warn("Unknown structure override mode in: {}", raw);
                 continue;
             }
 
@@ -68,13 +68,13 @@ public class StructureOverrideManager {
                 try {
                     offset = Integer.parseInt(parts[2]);
                 } catch (NumberFormatException e) {
-                    net.waterworld.worldflood.WorldFlood.LOGGER.warn("Invalid offset in structure override: {}", raw);
+                    com.github.kurokaita.worldflood.WorldFlood.LOGGER.warn("Invalid offset in structure override: {}", raw);
                     continue;
                 }
             }
 
             if (!idStr.matches("^[a-z0-9_.-]+:[a-z0-9_*.\\\\-]+(/[a-z0-9_*.\\\\-]+)?$")) {
-                net.waterworld.worldflood.WorldFlood.LOGGER.warn("Invalid structure id in override: {}", raw);
+                com.github.kurokaita.worldflood.WorldFlood.LOGGER.warn("Invalid structure id in override: {}", raw);
                 continue;
             }
 
@@ -90,7 +90,7 @@ public class StructureOverrideManager {
             }
             ResourceLocation id = ResourceLocation.tryParse(idStr);
             if (id == null) {
-                net.waterworld.worldflood.WorldFlood.LOGGER.warn("Could not parse structure override id: {}", raw);
+                com.github.kurokaita.worldflood.WorldFlood.LOGGER.warn("Could not parse structure override id: {}", raw);
                 continue;
             }
             cache.add(new Entry(id, wildcard, mode, offset));

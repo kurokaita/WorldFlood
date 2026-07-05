@@ -1,10 +1,10 @@
-package net.waterworld.worldflood.worldgen;
+package com.github.kurokaita.worldflood.worldgen;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.waterworld.worldflood.WorldFlood;
-import net.waterworld.worldflood.WorldFloodConfig;
+import com.github.kurokaita.worldflood.WorldFlood;
+import com.github.kurokaita.worldflood.WorldFloodConfig;
 
 import java.util.ArrayList;
 import java.util.List;

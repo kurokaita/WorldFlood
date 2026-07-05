@@ -1,4 +1,4 @@
-package net.waterworld.worldflood.worldgen;
+package com.github.kurokaita.worldflood.worldgen;
 
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
-import net.waterworld.worldflood.WorldFlood;
+import com.github.kurokaita.worldflood.WorldFlood;
 
 import java.util.BitSet;
 

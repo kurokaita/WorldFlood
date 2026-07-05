@@ -1,4 +1,4 @@
-package net.waterworld.worldflood.worldgen;
+package com.github.kurokaita.worldflood.worldgen;
 
 import net.minecraft.resources.ResourceLocation;
 
